@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CVC Brasília | Lojas no DF</title>
+<meta name="description" content="Fale com a loja CVC mais perto de você no Distrito Federal. Atendimento pelo WhatsApp.">
+<meta name="theme-color" content="#0a00b4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a00b4; --navy-2:#2b20d6; --yellow:#ffd200;
+    --bg:#f4f6fb; --card:#ffffff; --text:#0f1b33; --muted:#66728c; --line:#e2e7f1;
+    --wa:#25d366; --wa-dark:#128c4a;
+    --radius:16px;
+    --shadow-sm:0 1px 2px rgba(11,31,75,.06);
+    --shadow-md:0 12px 28px rgba(11,31,75,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.4}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:620px;margin:0 auto;padding:0 16px}
+
+  /* ---------- Topo ---------- */
+  .topbar{height:4px;background:linear-gradient(90deg,var(--yellow) 0 70%,var(--navy) 70% 100%)}
+  header.site{background:var(--card);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;justify-content:center;gap:16px;padding:22px 0}
+  .brand img{height:58px;width:auto;display:block}
+  .brand .fallback{display:none;background:none;color:var(--navy);font-weight:800;font-size:24px;letter-spacing:-.5px;line-height:1;padding:9px 12px;border-radius:10px}
+  .brand.no-logo img{display:none}
+  .brand.no-logo .fallback{display:block}
+  .brand .divider{width:1px;height:34px;background:var(--line)}
+  .brand .city{font-size:26px;font-weight:700;color:var(--navy);letter-spacing:-.4px}
+
+  .intro{text-align:center;padding:36px 0 8px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy-2)}
+  .eyebrow::before,.eyebrow::after{content:"";width:18px;height:2px;background:var(--yellow);border-radius:2px}
+  .intro h1{margin-top:10px;font-size:clamp(24px,6vw,32px);font-weight:800;letter-spacing:-.8px;color:var(--navy);line-height:1.15}
+  .intro p{margin-top:10px;color:var(--muted);font-size:15px}
+  .stats{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .stat{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--text);box-shadow:var(--shadow-sm)}
+  .stat svg{color:var(--navy-2)}
+
+  /* ---------- Grupo VIP ---------- */
+  .vip{margin-top:28px;display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;border-radius:20px;padding:18px 18px 18px 18px;box-shadow:var(--shadow-md);position:relative;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+  .vip::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,210,0,.10)}
+  .vip:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(11,31,75,.22)}
+  .vip-ico{flex:none;width:52px;height:52px;border-radius:14px;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 6px 16px rgba(37,211,102,.35)}
+  .vip-txt{min-width:0;position:relative;z-index:1}
+  .vip-txt b{display:block;font-size:17px;font-weight:800;letter-spacing:-.2px}
+  .vip-txt small{display:block;font-size:13px;color:#c8d2ea;margin-top:2px}
+  .vip-btn{margin-left:auto;flex:none;position:relative;z-index:1;background:var(--yellow);color:var(--navy);font-weight:800;font-size:13px;padding:10px 16px;border-radius:999px}
+
+  /* ---------- Lojas ---------- */
+  .stores{margin-top:36px;padding-bottom:40px}
+  .stores-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .stores-head h2{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+  .stores-head span{font-size:13px;color:var(--muted);font-weight:600}
+
+  .search{position:relative;display:block;margin-top:16px}
+  .search input{width:100%;font:inherit;font-size:15px;padding:14px 16px 14px 46px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--text);box-shadow:var(--shadow-sm);transition:border-color .15s ease,box-shadow .15s ease}
+  .search input::placeholder{color:#97a1b6}
+  .search input:focus{outline:none;border-color:var(--navy-2);box-shadow:0 0 0 4px rgba(22,53,122,.12)}
+  .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{font:inherit;font-size:14px;font-weight:600;white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 14px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .15s ease,border-color .15s ease,color .15s ease}
+  .chip:hover{border-color:#b9c4dc}
+  .chip .n{font-size:11.5px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#eef1f8;color:var(--muted);display:inline-grid;place-items:center}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+  .chip[aria-pressed="true"] .n{background:var(--yellow);color:var(--navy)}
+
+  .list{display:grid;gap:10px;margin-top:22px}
+  .store{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 14px 16px;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+  .store:hover{transform:translateY(-2px);border-color:#cdd6e8;box-shadow:var(--shadow-md)}
+  .store-ico{flex:none;width:44px;height:44px;border-radius:12px;background:#eef2fa;color:var(--navy-2);display:grid;place-items:center}
+  .store-info{min-width:0;flex:1}
+  .store-name{display:block;font-weight:700;font-size:15.5px;color:var(--text)}
+  .store-sub{display:block;font-size:13px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .store-cta{flex:none;display:inline-flex;align-items:center;gap:7px;background:var(--wa);color:#fff;font-size:13px;font-weight:700;padding:9px 14px;border-radius:999px;transition:background .15s ease}
+  .store:hover .store-cta{background:var(--wa-dark)}
+  .empty{text-align:center;color:var(--muted);padding:40px 8px;background:var(--card);border:1px dashed var(--line);border-radius:var(--radius)}
+
+  footer{border-top:1px solid var(--line);background:var(--card);text-align:center;color:var(--muted);font-size:12.5px;padding:20px 16px}
+
+  .chip:focus-visible,.store:focus-visible,.vip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+  @media (max-width:520px){
+    .brand{gap:12px;padding:18px 0}
+    .brand img{height:48px}
+    .brand .city{font-size:22px}
+    .brand .divider{height:28px}
+    .intro{padding-top:28px}
+    .vip{padding:16px;gap:14px}
+    .vip-btn{display:none}
+    .chips{flex-wrap:nowrap;overflow-x:auto;margin:16px -16px 0;padding:0 16px 4px;scrollbar-width:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 28px),transparent 100%);
+              mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 28px),transparent 100%)}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{flex:none}
+    .store-cta span{display:none}
+    .store-cta{padding:10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+<header class="site">
+  <div class="wrap">
+    <!-- LOGO: salve o arquivo do logo nesta mesma pasta com o nome logo-cvc.png -->
+    <div class="brand" id="brand">
+      <img src="logo-cvc.png" alt="CVC" onerror="document.getElementById('brand').classList.add('no-logo')">
+      <span class="fallback" aria-hidden="true">CVC</span>
+      <span class="divider" aria-hidden="true"></span>
+      <span class="city">Brasília</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <span class="eyebrow">Lojas no Distrito Federal</span>
+    <h1>Fale com a loja CVC<br>mais perto de você</h1>
+    <p>Escolha a região ou busque pelo nome da loja.</p>
+    <div class="stats">
+      <span class="stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span id="total"></span>
+      </span>
+      <span class="stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.9L3 21l1.1-4.4A9 9 0 1 1 21 12z"/></svg>
+        Atendimento pelo WhatsApp
+      </span>
+    </div>
+  </section>
+
+  <a class="vip" href="https://chat.whatsapp.com/B62r6D1wqCcLMEwSeqj29b" target="_blank" rel="noopener">
+    <span class="vip-ico" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.7-.5zM12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2zm0 18.3a8.3 8.3 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.3 8.3 0 1 1 12 20.3z"/></svg>
+    </span>
+    <span class="vip-txt">
+      <b>Grupo VIP de Promoções</b>
+      <small>Ofertas exclusivas no WhatsApp · gratuito</small>
+    </span>
+    <span class="vip-btn">Entrar no grupo</span>
+  </a>
+
+  <section class="stores" aria-labelledby="lojas-titulo">
+    <div class="stores-head">
+      <h2 id="lojas-titulo">Nossas lojas</h2>
+      <span id="contagem"></span>
+    </div>
+
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar loja ou bairro" aria-label="Buscar loja ou bairro" autocomplete="off">
+    </label>
+
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por região"></div>
+
+    <div class="list" id="list" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>CVC Brasília · Lojas no Distrito Federal e Entorno</footer>
+
+<script>
+/* ============================================================
+   EDITE AQUI: lojas e regiões.
+   - nome: texto do botão
+   - local: linha de baixo (bairro/cidade)
+   - regiao: precisa ser igual a um item de REGIOES
+   - whats: número com DDI+DDD, só dígitos (ex: 5561999999999)
+   A ordem aqui não importa: o site sempre mostra em ordem alfabética.
+   ============================================================ */
+const REGIOES = [
+  "Asa Sul",
+  "Asa Norte",
+  "Sudoeste e Lagos",
+  "Guará e Park Way",
+  "Taguatinga e Águas Claras",
+  "Ceilândia e Samambaia",
+  "Gama e Santa Maria",
+  "Sobradinho e Planaltina",
+  "Entorno"
+];
+
+const LOJAS = [
+  { nome:"114 Sul",                    local:"Asa Sul",                 regiao:"Asa Sul",                    whats:"5561991521535" },
+  { nome:"304 Sul",                    local:"Asa Sul",                 regiao:"Asa Sul",                    whats:"5561993699439" },
+  { nome:"408 Sul",                    local:"Asa Sul",                 regiao:"Asa Sul",                    whats:"5561991284430" },
+  { nome:"Pátio Brasil Shopping",      local:"Setor Comercial Sul",     regiao:"Asa Sul",                    whats:"5561992692020" },
+
+  { nome:"308 Norte",                  local:"Asa Norte",               regiao:"Asa Norte",                  whats:"5561992202393" },
+  { nome:"Boulevard Shopping",         local:"Asa Norte",               regiao:"Asa Norte",                  whats:"5561992370404" },
+  { nome:"Brasília Shopping",          local:"Setor Comercial Norte",   regiao:"Asa Norte",                  whats:"5561999349760" },
+  { nome:"Conjunto Nacional",          local:"Setor de Diversões Norte",regiao:"Asa Norte",                  whats:"5561993799224" },
+
+  { nome:"Sudoeste",                   local:"Sudoeste",                regiao:"Sudoeste e Lagos",           whats:"5561992001178" },
+  { nome:"Terraço Shopping",           local:"Octogonal",               regiao:"Sudoeste e Lagos",           whats:"5561994274526" },
+  { nome:"Deck Norte",                 local:"Lago Norte",              regiao:"Sudoeste e Lagos",           whats:"5561996012049" },
+  { nome:"Gilberto Salomão",           local:"Lago Sul",                regiao:"Sudoeste e Lagos",           whats:"556138771211" },
+
+  { nome:"ParkShopping",               local:"Guará",                   regiao:"Guará e Park Way",           whats:"5561993271961" },
+  { nome:"Guará I",                    local:"Guará",                   regiao:"Guará e Park Way",           whats:"5561983117387" },
+  { nome:"Assaí Park Sul",             local:"Park Sul",                regiao:"Guará e Park Way",           whats:"5561999916622" },
+  { nome:"Núcleo Bandeirante",         local:"Núcleo Bandeirante",      regiao:"Guará e Park Way",           whats:"556130220094" },
+  { nome:"Riacho Fundo",               local:"Riacho Fundo",            regiao:"Guará e Park Way",           whats:"5561996124954" },
+
+  { nome:"Taguatinga Shopping",        local:"Taguatinga · antiga loja do Alameda Shopping", regiao:"Taguatinga e Águas Claras", whats:"5561995079898" },
+  { nome:"Comercial Norte",            local:"Taguatinga",              regiao:"Taguatinga e Águas Claras",  whats:"5561991889866" },
+  { nome:"Manhattan Shopping",         local:"Águas Claras",            regiao:"Taguatinga e Águas Claras",  whats:"5561993622828" },
+  { nome:"Vicente Pires",              local:"Vicente Pires",           regiao:"Taguatinga e Águas Claras",  whats:"5561993538102" },
+
+  { nome:"JK Shopping",                local:"Ceilândia",               regiao:"Ceilândia e Samambaia",      whats:"5561991675188" },
+  { nome:"Assaí Ceilândia",            local:"Ceilândia",               regiao:"Ceilândia e Samambaia",      whats:"5561981011425" },
+  { nome:"Samambaia Norte",            local:"Samambaia",               regiao:"Ceilândia e Samambaia",      whats:"556135738181" },
+  { nome:"Recanto das Emas",           local:"Recanto das Emas",        regiao:"Ceilândia e Samambaia",      whats:"5561984128008" },
+  { nome:"Brazlândia",                 local:"Brazlândia",              regiao:"Ceilândia e Samambaia",      whats:"5561996628641" },
+
+  { nome:"Gama Shopping",              local:"Gama",                    regiao:"Gama e Santa Maria",         whats:"5561993640101" },
+  { nome:"Santa Maria",                local:"Avenida Alagados · única loja", regiao:"Gama e Santa Maria",   whats:"5561999808009" },
+
+  { nome:"Sobradinho Shopping",        local:"Sobradinho",              regiao:"Sobradinho e Planaltina",    whats:"5561994158223" },
+  { nome:"Planaltina",                 local:"Planaltina",              regiao:"Sobradinho e Planaltina",    whats:"5561994301408" },
+
+  { nome:"Formosa",                    local:"Formosa · GO",            regiao:"Entorno",                    whats:"5561999760877" }
+];
+
+/* ============================================================ */
+const MSG = "Olá! Vim pelo site da CVC Brasília e gostaria de atendimento.";
+const TODAS = "Todas";
+const chipsEl = document.getElementById("chips");
+const listEl = document.getElementById("list");
+const qEl = document.getElementById("q");
+const contEl = document.getElementById("contagem");
+let atual = TODAS;
+
+const ordenadas = [...LOJAS].sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR",{numeric:true,sensitivity:"base"}));
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const plural = n => n + (n===1 ? " loja" : " lojas");
+
+document.getElementById("total").textContent = plural(LOJAS.length) + " no DF";
+
+const pinIcon = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+const waIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.7-.5zM12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2zm0 18.3a8.3 8.3 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.3 8.3 0 1 1 12 20.3z"/></svg>';
+
+function renderChips(){
+  chipsEl.innerHTML = [TODAS, ...REGIOES].map(r=>{
+    const n = r===TODAS ? LOJAS.length : LOJAS.filter(l=>l.regiao===r).length;
+    return `<button class="chip" type="button" data-r="${esc(r)}" aria-pressed="${r===atual}">${esc(r)}<span class="n">${n}</span></button>`;
+  }).join("");
+}
+
+function card(l){
+  const url = `https://wa.me/${l.whats}?text=${encodeURIComponent(MSG)}`;
+  return `<a class="store" href="${url}" target="_blank" rel="noopener" aria-label="${esc(l.nome)}, ${esc(l.local)}: abrir WhatsApp">
+    <span class="store-ico">${pinIcon}</span>
+    <span class="store-info"><span class="store-name">${esc(l.nome)}</span><span class="store-sub">${esc(l.local)}</span></span>
+    <span class="store-cta">${waIcon}<span>WhatsApp</span></span>
+  </a>`;
+}
+
+function renderList(){
+  const q = norm(qEl.value.trim());
+  const filtradas = ordenadas.filter(l =>
+    (atual===TODAS || l.regiao===atual) &&
+    (!q || norm(l.nome+" "+l.local+" "+l.regiao).includes(q))
+  );
+  contEl.textContent = plural(filtradas.length);
+  listEl.innerHTML = filtradas.length
+    ? filtradas.map(card).join("")
+    : '<p class="empty">Nenhuma loja encontrada. Tente outro nome ou bairro.</p>';
+}
+
+chipsEl.addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  atual = b.dataset.r;
+  chipsEl.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c.dataset.r===atual));
+  renderList();
+});
+qEl.addEventListener("input", renderList);
+
+renderChips();
+renderList();
+</script>
+</body>
+</html>
